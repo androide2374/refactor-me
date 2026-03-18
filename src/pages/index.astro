@@ -252,6 +252,7 @@ const habitIcons = {
 									src={exercise.imageUrl}
 									alt={`Referencia visual de ${exercise.nameEsAr}`}
 									loading="lazy"
+									onerror={`if (this.src !== '${exercise.imageFallbackUrl}') this.src='${exercise.imageFallbackUrl}'`}
 									class="h-40 w-full rounded-[1.1rem] object-cover"
 								/>
 								<div class="flex items-start justify-between gap-4">

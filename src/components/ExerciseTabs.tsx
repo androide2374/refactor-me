@@ -73,6 +73,12 @@ export default function ExerciseTabs() {
                                         src={exercise.imageUrl}
                                         alt={`Referencia visual de ${exercise.nameEsAr}`}
                                         loading="lazy"
+                                        onError={(event) => {
+										const img = event.currentTarget;
+										if (img.src !== exercise.imageFallbackUrl) {
+											img.src = exercise.imageFallbackUrl;
+										}
+									}}
                                         className="h-40 w-full rounded-[1.1rem] object-cover"
                                     />
                                     <div className="flex items-center justify-between gap-3">
@@ -191,6 +197,12 @@ export default function ExerciseTabs() {
                             src={selectedExercise.imageUrl}
                             alt={`Demostracion ${selectedExercise.nameEsAr}`}
                             loading="lazy"
+                            onError={(event) => {
+							const img = event.currentTarget;
+							if (img.src !== selectedExercise.imageFallbackUrl) {
+								img.src = selectedExercise.imageFallbackUrl;
+							}
+						}}
                             className="mt-4 h-52 w-full rounded-[1.15rem] object-cover"
                         />
 

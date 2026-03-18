@@ -115,7 +115,8 @@ export const exercises = [
 		cues: ['Pecho arriba', 'Barra al pecho alto', 'No balancear el torso'],
 		riskNote: 'Evita hiperextender la espalda para terminar la repeticion.',
 		learningLoad: 58,
-		imageUrl: '/exercises/lat-pulldown.svg',
+		imageUrl: 'https://i.ytimg.com/vi/CAwf7n6Luuc/hqdefault.jpg',
+		imageFallbackUrl: '/exercises/lat-pulldown.svg',
 		videoUrl: 'https://www.youtube.com/results?search_query=lat+pulldown+machine+tutorial',
 		howTo: [
 			'Ajusta el apoyo de piernas para que los muslos queden fijos.',
@@ -139,7 +140,8 @@ export const exercises = [
 		cues: ['Pies firmes', 'Munecas neutras', 'Controla el regreso'],
 		riskNote: 'No rebotes ni empujes con la cabeza despegandose del respaldo.',
 		learningLoad: 55,
-		imageUrl: '/exercises/chest-press.svg',
+		imageUrl: 'https://i.ytimg.com/vi/sqNwDkUU_Ps/hqdefault.jpg',
+		imageFallbackUrl: '/exercises/chest-press.svg',
 		videoUrl: 'https://www.youtube.com/results?search_query=chest+press+machine+form',
 		howTo: [
 			'Ajusta el asiento para que las manijas queden a mitad del pecho.',
@@ -163,7 +165,8 @@ export const exercises = [
 		cues: ['Rodillas siguen la punta del pie', 'Talones pegados', 'Bajada lenta'],
 		riskNote: 'No bloquees completamente las rodillas en la extension.',
 		learningLoad: 64,
-		imageUrl: '/exercises/leg-press.svg',
+		imageUrl: 'https://i.ytimg.com/vi/IZxyjW7MPJQ/hqdefault.jpg',
+		imageFallbackUrl: '/exercises/leg-press.svg',
 		videoUrl: 'https://www.youtube.com/results?search_query=leg+press+machine+proper+form',
 		howTo: [
 			'Ubica pies al ancho de hombros en la plataforma.',
@@ -187,7 +190,8 @@ export const exercises = [
 		cues: ['Costillas abajo', 'Gluteos activos', 'Cuello neutro'],
 		riskNote: 'Si la lumbar colapsa, termina la serie.',
 		learningLoad: 52,
-		imageUrl: '/exercises/plank.svg',
+		imageUrl: 'https://i.ytimg.com/vi/pSHjTRCQxIw/hqdefault.jpg',
+		imageFallbackUrl: '/exercises/plank.svg',
 		videoUrl: 'https://www.youtube.com/results?search_query=plank+exercise+proper+form',
 		howTo: [
 			'Apoya antebrazos justo debajo de hombros.',

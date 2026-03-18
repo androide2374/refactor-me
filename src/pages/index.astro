@@ -1,0 +1,396 @@
+---
+import {
+	Activity,
+	Brain,
+	CalendarDays,
+	Clock3,
+	Droplets,
+	Dumbbell,
+	Footprints,
+	Gauge,
+	HeartPulse,
+	MapPinned,
+	MoonStar,
+	PersonStanding,
+	ShieldAlert,
+	Target,
+	TriangleAlert,
+	UtensilsCrossed,
+	Workflow
+} from 'lucide-react';
+import ExerciseTabs from '../components/ExerciseTabs';
+import GymIllustration from '../components/GymIllustration.astro';
+import SessionCharts from '../components/charts/SessionCharts';
+import {
+	athleteProfile,
+	bmiReference,
+	exercises,
+	habitGuides,
+	progressionRules,
+	sessionBlocks,
+	weeklySchedule
+} from '../data/training-plan';
+import Layout from '../layouts/Layout.astro';
+
+const profileStats = [
+	{
+		label: 'Frecuencia',
+		value: `${athleteProfile.trainingDays} sesiones/semana`,
+		detail: 'Ritmo suficiente para progresar sin saturar la agenda.',
+		icon: CalendarDays
+	},
+	{
+		label: 'Duracion',
+		value: `${athleteProfile.sessionMinutes} min`,
+		detail: 'Bloques cerrados para entrar, entrenar y salir sin friccion.',
+		icon: Clock3
+	},
+	{
+		label: 'Entorno',
+		value: athleteProfile.gym,
+		detail: 'Plan armado sobre maquinas guiadas y cardio de bajo impacto.',
+		icon: MapPinned
+	},
+	{
+		label: 'Referencia corporal',
+		value: `IMC ${bmiReference}`,
+		detail: 'Se prioriza tolerancia mecanica, postura y continuidad.',
+		icon: Gauge
+	}
+];
+
+const quickSignals = [
+	{
+		title: 'Semaglutida',
+		text: 'Arranca cada sesion ya hidratado. Apunta a 500-700 ml antes de entrenar y no esperes a tener sed.',
+		icon: Droplets
+	},
+	{
+		title: 'Presion alta previa',
+		text: 'Si aparecen mareos, palpitaciones o dolor de cabeza pulsante, se corta la sesion y se consulta.',
+		icon: ShieldAlert
+	},
+	{
+		title: 'Trabajo mental alto',
+		text: 'La meta no es exprimirte. La meta es cumplir 3 veces por semana con tecnica limpia.',
+		icon: Brain
+	}
+];
+
+const exerciseIcons = [Dumbbell, Activity, PersonStanding, Workflow];
+
+const habitIcons = {
+	'Hidratacion reforzada': Droplets,
+	'Pre-entreno liviano': UtensilsCrossed,
+	'Sueno util': MoonStar,
+	'Calzado estable': Footprints
+};
+---
+
+<Layout>
+	<main class="mx-auto flex min-h-screen max-w-7xl flex-col gap-12 px-4 py-6 sm:px-6 lg:px-8 lg:py-8">
+		<section class="grid gap-6 lg:grid-cols-[1.1fr_0.9fr] lg:items-stretch">
+			<div class="relative overflow-hidden rounded-[2rem] border border-border/70 bg-card/85 p-6 shadow-[0_24px_80px_rgba(18,38,31,0.14)] backdrop-blur xl:p-8">
+				<div class="absolute inset-x-0 top-0 h-32 bg-[radial-gradient(circle_at_top,rgba(240,139,75,0.22),transparent_68%)]"></div>
+				<div class="relative flex h-full flex-col justify-between gap-8">
+					<div class="space-y-5">
+						<div class="flex flex-wrap gap-2">
+							<span class="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-primary">
+								<Target className="h-3.5 w-3.5" />
+								Fase 1 · semanas 1 a 4
+							</span>
+							<span class="inline-flex items-center gap-2 rounded-full border border-accent/20 bg-accent/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-accent-foreground">
+								<HeartPulse className="h-3.5 w-3.5" />
+								Habito antes que heroics
+							</span>
+						</div>
+						<div class="space-y-4">
+							<p class="max-w-fit rounded-full border border-border/70 bg-background/70 px-4 py-1 text-sm font-medium text-muted-foreground">
+								Plan visual para entrenar antes de empezar la jornada tecnica
+							</p>
+							<h1 class="max-w-3xl text-4xl font-semibold leading-tight tracking-[-0.04em] text-foreground sm:text-5xl lg:text-6xl">
+								Entrena con maquinas, gana inercia y reduce friccion en cada sesion.
+							</h1>
+							<p class="max-w-2xl text-base leading-7 text-muted-foreground sm:text-lg">
+								Programa inicial para {athleteProfile.age} anos, {athleteProfile.weightKg} kg y jornada sedentaria. El foco es bajar carga articular, corregir postura de oficina y construir sobrecarga progresiva sin improvisar.
+							</p>
+						</div>
+						<div class="flex flex-wrap gap-3">
+							<a href="#plan-de-hoy" class="inline-flex items-center justify-center rounded-full bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground transition hover:translate-y-[-1px] hover:bg-primary/90">
+								Ver sesion completa
+							</a>
+							<a href="#graficas" class="inline-flex items-center justify-center rounded-full border border-border bg-background/80 px-5 py-3 text-sm font-semibold text-foreground transition hover:border-primary/30 hover:bg-background">
+								Entender el plan rapido
+							</a>
+						</div>
+					</div>
+					<div class="grid gap-3 sm:grid-cols-2">
+						<div class="rounded-[1.5rem] border border-border/70 bg-background/75 p-4">
+							<p class="text-sm text-muted-foreground">Horario preferido</p>
+							<p class="mt-2 text-2xl font-semibold text-foreground">08:30 am</p>
+							<p class="mt-2 text-sm text-muted-foreground">Ventana con mejor energia y menos ruido mental.</p>
+						</div>
+						<div class="rounded-[1.5rem] border border-border/70 bg-background/75 p-4">
+							<p class="text-sm text-muted-foreground">Meta principal</p>
+							<p class="mt-2 text-2xl font-semibold text-foreground">Bajar peso + postura</p>
+							<p class="mt-2 text-sm text-muted-foreground">Se consolida habito antes de buscar intensidad alta.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="relative overflow-hidden rounded-[2rem] border border-border/70 bg-[#15251e] p-6 text-white shadow-[0_24px_80px_rgba(18,38,31,0.14)] xl:p-8">
+				<div class="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(240,139,75,0.35),transparent_30%),radial-gradient(circle_at_80%_10%,rgba(96,214,169,0.26),transparent_22%)]"></div>
+				<div class="relative flex h-full flex-col justify-between gap-6">
+					<div class="space-y-4">
+						<p class="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/8 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-white/80">
+							<Activity className="h-3.5 w-3.5" />
+							Resumen operativo
+						</p>
+						<h2 class="max-w-md text-2xl font-semibold tracking-[-0.03em] text-white sm:text-3xl">
+							Tu sesion ideal cabe en una sola pantalla.
+						</h2>
+						<p class="max-w-md text-sm leading-6 text-white/72">
+							Bloques por tiempo, ejercicios exactos, reglas de fatiga y recordatorios de hidratacion para no entrar al gimnasio a improvisar.
+						</p>
+					</div>
+					<div class="rounded-[1.75rem] border border-white/10 bg-white/6 p-3 backdrop-blur">
+						<GymIllustration />
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+			{
+				profileStats.map((stat) => {
+					const Icon = stat.icon;
+
+					return (
+						<article class="rounded-[1.5rem] border border-border/70 bg-card/80 p-5 shadow-[0_10px_30px_rgba(18,38,31,0.06)]">
+							<div class="flex items-start justify-between gap-4">
+								<div>
+									<p class="text-sm font-medium text-muted-foreground">{stat.label}</p>
+									<p class="mt-3 text-2xl font-semibold tracking-[-0.03em] text-foreground">{stat.value}</p>
+								</div>
+								<span class="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+									<Icon className="h-5 w-5" />
+								</span>
+							</div>
+							<p class="mt-4 text-sm leading-6 text-muted-foreground">{stat.detail}</p>
+						</article>
+					);
+				})
+			}
+		</section>
+
+		<section class="grid gap-4 lg:grid-cols-3">
+			{
+				quickSignals.map((signal) => {
+					const Icon = signal.icon;
+
+					return (
+						<article class="rounded-[1.5rem] border border-border/70 bg-background/80 p-5 shadow-[0_10px_30px_rgba(18,38,31,0.04)]">
+							<div class="flex items-start gap-4">
+								<span class="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-accent/12 text-accent-foreground">
+									<Icon className="h-5 w-5" />
+								</span>
+								<div>
+									<p class="text-sm font-semibold uppercase tracking-[0.16em] text-muted-foreground">{signal.title}</p>
+									<p class="mt-2 text-sm leading-6 text-foreground/86">{signal.text}</p>
+								</div>
+							</div>
+						</article>
+					);
+				})
+			}
+		</section>
+
+		<section id="plan-de-hoy" class="space-y-5">
+			<div class="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+				<div>
+					<p class="text-sm font-semibold uppercase tracking-[0.18em] text-primary">Sesion base</p>
+					<h2 class="mt-2 text-3xl font-semibold tracking-[-0.04em] text-foreground sm:text-4xl">
+						Que hacer durante los 60 minutos
+					</h2>
+				</div>
+				<p class="max-w-2xl text-sm leading-6 text-muted-foreground">
+					Cada bloque tiene un objetivo biomecanico claro: elevar temperatura, mover carga con control, estabilizar el core y bajar revoluciones antes de volver al trabajo.
+				</p>
+			</div>
+
+			<div class="grid gap-4 xl:grid-cols-5">
+				{
+					sessionBlocks.map((block) => (
+						<article class="rounded-[1.5rem] border border-border/70 bg-card/80 p-5 shadow-[0_10px_30px_rgba(18,38,31,0.06)]">
+							<div class="flex items-center justify-between gap-3">
+								<span class="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-primary/10 text-sm font-semibold text-primary">
+									{block.id}
+								</span>
+								<span class="rounded-full border border-border bg-background/70 px-3 py-1 text-xs font-medium text-muted-foreground">
+									{block.duration} min
+								</span>
+							</div>
+							<h3 class="mt-4 text-xl font-semibold tracking-[-0.03em] text-foreground">{block.name}</h3>
+							<p class="mt-2 text-sm font-medium text-primary">{block.intensity}</p>
+							<p class="mt-4 text-sm leading-6 text-muted-foreground">{block.focus}</p>
+							<p class="mt-4 rounded-[1.25rem] border border-border/70 bg-background/80 p-3 text-sm leading-6 text-foreground/86">
+								{block.prescription}
+							</p>
+						</article>
+					))
+				}
+			</div>
+		</section>
+
+		<section class="space-y-5">
+			<div class="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+				<div>
+					<p class="text-sm font-semibold uppercase tracking-[0.18em] text-primary">Ejercicios clave</p>
+					<h2 class="mt-2 text-3xl font-semibold tracking-[-0.04em] text-foreground sm:text-4xl">
+						Movimientos que construyen la base
+					</h2>
+				</div>
+				<p class="max-w-2xl text-sm leading-6 text-muted-foreground">
+					El criterio no es variedad infinita. El criterio es repetir patron, aprender tecnica y registrar sensaciones antes de aumentar carga.
+				</p>
+			</div>
+
+			<div class="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+				{
+					exercises.map((exercise, index) => {
+						const Icon = exerciseIcons[index];
+
+						return (
+							<article class="rounded-[1.75rem] border border-border/70 bg-card/80 p-5 shadow-[0_10px_30px_rgba(18,38,31,0.06)]">
+								<div class="flex items-start justify-between gap-4">
+									<span class="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+										<Icon className="h-5 w-5" />
+									</span>
+									<span class="rounded-full border border-border bg-background/70 px-3 py-1 text-xs font-medium text-muted-foreground">
+										{exercise.block}
+									</span>
+								</div>
+								<h3 class="mt-4 text-xl font-semibold tracking-[-0.03em] text-foreground">{exercise.name}</h3>
+								<p class="mt-2 text-sm text-muted-foreground">{exercise.machine}</p>
+								<div class="mt-4 flex flex-wrap gap-2 text-xs font-medium text-foreground/76">
+									<span class="rounded-full bg-secondary px-3 py-1">{exercise.sets} series</span>
+									<span class="rounded-full bg-secondary px-3 py-1">{exercise.reps} reps</span>
+									<span class="rounded-full bg-secondary px-3 py-1">Descanso {exercise.restSeconds}s</span>
+								</div>
+								<p class="mt-4 text-sm leading-6 text-foreground/86">{exercise.why}</p>
+								<p class="mt-4 rounded-[1.25rem] border border-border/70 bg-background/80 p-3 text-sm leading-6 text-muted-foreground">
+									{exercise.beginnerTip}
+								</p>
+							</article>
+						);
+					})
+				}
+			</div>
+		</section>
+
+		<section id="graficas" class="space-y-5">
+			<div class="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+				<div>
+					<p class="text-sm font-semibold uppercase tracking-[0.18em] text-primary">Graficas</p>
+					<h2 class="mt-2 text-3xl font-semibold tracking-[-0.04em] text-foreground sm:text-4xl">
+						Aprender el plan con datos visuales
+					</h2>
+				</div>
+				<p class="max-w-2xl text-sm leading-6 text-muted-foreground">
+					La progresion aca no se decide por intuicion. Se decide por tolerancia al esfuerzo, calidad tecnica y adherencia semana a semana.
+				</p>
+			</div>
+			<SessionCharts client:only="react" />
+		</section>
+
+		<section class="grid gap-5 lg:grid-cols-[1.05fr_0.95fr]">
+			<div class="rounded-[2rem] border border-border/70 bg-card/80 p-5 shadow-[0_10px_30px_rgba(18,38,31,0.06)] sm:p-6">
+				<div class="max-w-2xl">
+					<p class="text-sm font-semibold uppercase tracking-[0.18em] text-primary">Plan semanal</p>
+					<h2 class="mt-2 text-3xl font-semibold tracking-[-0.04em] text-foreground">Tres sesiones, una sola logica</h2>
+					<p class="mt-3 text-sm leading-6 text-muted-foreground">
+						No hace falta inventar tres rutinas diferentes. Hace falta repetir bien la misma estructura, cambiar el foco de aprendizaje y monitorear como responde el cuerpo.
+					</p>
+				</div>
+				<div class="mt-6 grid gap-4 md:grid-cols-3">
+					{
+						weeklySchedule.map((day) => (
+							<article class="rounded-[1.5rem] border border-border/70 bg-background/70 p-4">
+								<p class="text-sm font-semibold text-primary">{day.day}</p>
+								<h3 class="mt-2 text-lg font-semibold text-foreground">{day.label}</h3>
+								<p class="mt-3 text-sm font-medium text-foreground/86">{day.focus}</p>
+								<p class="mt-3 text-sm leading-6 text-muted-foreground">{day.note}</p>
+							</article>
+						))
+					}
+				</div>
+			</div>
+
+			<div class="rounded-[2rem] border border-border/70 bg-[#102019] p-5 text-white shadow-[0_10px_30px_rgba(18,38,31,0.08)] sm:p-6">
+				<div class="flex items-center gap-3">
+					<span class="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-white/8 text-white">
+						<TriangleAlert className="h-5 w-5" />
+					</span>
+					<div>
+						<p class="text-sm font-semibold uppercase tracking-[0.18em] text-white/70">Reglas del motor</p>
+						<h2 class="mt-1 text-2xl font-semibold tracking-[-0.03em] text-white">Ajustes automaticos de la sesion</h2>
+					</div>
+				</div>
+				<div class="mt-6 space-y-4">
+					{
+						progressionRules.map((rule) => (
+							<div class="rounded-[1.5rem] border border-white/10 bg-white/6 p-4">
+								<p class="text-sm font-semibold text-white">{rule.title}</p>
+								<p class="mt-2 text-sm leading-6 text-white/72">{rule.description}</p>
+							</div>
+						))
+					}
+				</div>
+			</div>
+		</section>
+
+		<section id="reglas" class="grid gap-5 lg:grid-cols-[0.95fr_1.05fr]">
+			<div class="rounded-[2rem] border border-border/70 bg-card/80 p-5 shadow-[0_10px_30px_rgba(18,38,31,0.06)] sm:p-6">
+				<div class="flex items-start gap-3">
+					<span class="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+						<HeartPulse className="h-5 w-5" />
+					</span>
+					<div>
+						<p class="text-sm font-semibold uppercase tracking-[0.18em] text-primary">Habitos criticos</p>
+						<h2 class="mt-1 text-3xl font-semibold tracking-[-0.04em] text-foreground">Lo que sostiene la progresion</h2>
+					</div>
+				</div>
+				<div class="mt-6 grid gap-4 sm:grid-cols-2">
+					{
+						habitGuides.map((habit) => {
+							const Icon = habitIcons[habit.title as keyof typeof habitIcons];
+
+							return (
+								<article class="rounded-[1.5rem] border border-border/70 bg-background/75 p-4">
+									<div class="flex items-start gap-3">
+										<span class="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-accent/12 text-accent-foreground">
+											<Icon className="h-4.5 w-4.5" />
+										</span>
+										<div>
+											<h3 class="text-base font-semibold text-foreground">{habit.title}</h3>
+											<p class="mt-2 text-sm leading-6 text-muted-foreground">{habit.description}</p>
+										</div>
+									</div>
+								</article>
+							);
+						})
+					}
+				</div>
+			</div>
+
+			<div class="rounded-[2rem] border border-border/70 bg-card/80 p-2 shadow-[0_10px_30px_rgba(18,38,31,0.06)] sm:p-3">
+				<ExerciseTabs client:load />
+			</div>
+		</section>
+
+		<footer class="rounded-[2rem] border border-border/70 bg-background/90 px-6 py-5 text-sm leading-6 text-muted-foreground">
+			Versión 1 lista para consulta visual. El siguiente escalon natural es capturar logs de entrenamiento y aplicar automaticamente reglas de RPE, energia, sueno y alertas de salud sobre los datos reales.
+		</footer>
+	</main>
+</Layout>

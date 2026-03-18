@@ -1,0 +1,99 @@
+@import "@fontsource-variable/outfit";
+@import "@fontsource-variable/fira-code";
+@import "tailwindcss";
+
+:root {
+	--background: #f3ede4;
+	--foreground: #15221a;
+	--card: rgba(255, 250, 244, 0.8);
+	--card-foreground: #15221a;
+	--popover: #fffaf4;
+	--popover-foreground: #15221a;
+	--primary: #165d48;
+	--primary-foreground: #f7fbf8;
+	--secondary: #dce7de;
+	--secondary-foreground: #20372b;
+	--muted: #e9dfd1;
+	--muted-foreground: #5d625d;
+	--accent: #f08b4b;
+	--accent-foreground: #3b2315;
+	--destructive: #c44f3d;
+	--destructive-foreground: #fff8f5;
+	--border: rgba(20, 34, 26, 0.12);
+	--input: rgba(20, 34, 26, 0.12);
+	--ring: rgba(22, 93, 72, 0.4);
+	--chart-1: #165d48;
+	--chart-2: #f08b4b;
+	--chart-3: #4f8f7a;
+	--chart-4: #e6b96b;
+	--chart-5: #284d3a;
+	--radius: 1.5rem;
+}
+
+@theme inline {
+	--color-background: var(--background);
+	--color-foreground: var(--foreground);
+	--color-card: var(--card);
+	--color-card-foreground: var(--card-foreground);
+	--color-popover: var(--popover);
+	--color-popover-foreground: var(--popover-foreground);
+	--color-primary: var(--primary);
+	--color-primary-foreground: var(--primary-foreground);
+	--color-secondary: var(--secondary);
+	--color-secondary-foreground: var(--secondary-foreground);
+	--color-muted: var(--muted);
+	--color-muted-foreground: var(--muted-foreground);
+	--color-accent: var(--accent);
+	--color-accent-foreground: var(--accent-foreground);
+	--color-destructive: var(--destructive);
+	--color-destructive-foreground: var(--destructive-foreground);
+	--color-border: var(--border);
+	--color-input: var(--input);
+	--color-ring: var(--ring);
+	--color-chart-1: var(--chart-1);
+	--color-chart-2: var(--chart-2);
+	--color-chart-3: var(--chart-3);
+	--color-chart-4: var(--chart-4);
+	--color-chart-5: var(--chart-5);
+	--font-sans: "Outfit Variable", "Avenir Next", sans-serif;
+	--font-mono: "Fira Code Variable", monospace;
+	--radius-sm: calc(var(--radius) - 0.5rem);
+	--radius-md: calc(var(--radius) - 0.25rem);
+	--radius-lg: var(--radius);
+	--radius-xl: calc(var(--radius) + 0.5rem);
+	--shadow-soft: 0 18px 50px rgba(18, 38, 31, 0.08);
+}
+
+* {
+	box-sizing: border-box;
+	border-color: var(--border);
+}
+
+html {
+	scroll-behavior: smooth;
+	background: var(--background);
+}
+
+body {
+	margin: 0;
+	min-height: 100vh;
+	background:
+		radial-gradient(circle at top, rgba(240, 139, 75, 0.2), transparent 28%),
+		radial-gradient(circle at 100% 18%, rgba(22, 93, 72, 0.16), transparent 26%),
+		linear-gradient(180deg, #f8f1e8 0%, #f3ede4 48%, #efe7da 100%);
+	color: var(--foreground);
+	font-family: var(--font-sans);
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+a {
+	color: inherit;
+	text-decoration: none;
+}
+
+::selection {
+	background: rgba(22, 93, 72, 0.18);
+	color: var(--foreground);
+}

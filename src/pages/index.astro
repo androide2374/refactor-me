@@ -21,6 +21,7 @@ import {
 } from 'lucide-react';
 import ExerciseTabs from '../components/ExerciseTabs';
 import GymIllustration from '../components/GymIllustration.astro';
+import ProfileSwitcher from '../components/ProfileSwitcher.astro';
 import ThemeSwitcher from '../components/ThemeSwitcher';
 import TrainingBlocksGrid from '../components/TrainingBlocksGrid';
 import SessionCharts from '../components/charts/SessionCharts';
@@ -91,7 +92,8 @@ const habitIcons = {
 
 <Layout>
 	<main class="mx-auto flex min-h-screen max-w-7xl flex-col gap-12 px-4 py-6 sm:px-6 lg:px-8 lg:py-8">
-		<section class="flex justify-end">
+		<section class="flex flex-col justify-end gap-2 sm:flex-row sm:items-center">
+			<ProfileSwitcher currentProfile="yo" />
 			<ThemeSwitcher client:load />
 		</section>
 

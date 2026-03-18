@@ -1,0 +1,40 @@
+---
+import { availableProfiles } from '../data/training-plan';
+
+interface Props {
+	currentProfile: 'yo' | 'pareja';
+}
+
+const { currentProfile } = Astro.props;
+---
+
+<div class="inline-flex w-full items-center justify-between gap-3 rounded-[1.25rem] border border-border/70 bg-card/80 p-2 sm:w-auto">
+	<span class="px-2 text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">Perfil</span>
+	<div class="inline-flex gap-1 rounded-[1rem] bg-background/80 p-1">
+		{
+			availableProfiles.map((profile) => {
+				const isActive = profile.id === currentProfile;
+
+				return (
+					<a
+						href={profile.href}
+						class:list={[
+							'inline-flex items-center gap-2 rounded-[0.9rem] px-3 py-2 text-xs font-semibold transition',
+							isActive
+								? 'bg-primary text-primary-foreground shadow-[0_10px_20px_rgba(22,93,72,0.28)]'
+								: 'text-muted-foreground hover:bg-secondary hover:text-foreground'
+						]}
+					>
+						{profile.label}
+						<span class:list={[
+							'rounded-full px-2 py-0.5 text-[10px] font-bold uppercase tracking-[0.12em]',
+							profile.planReady ? 'bg-emerald-500/20 text-emerald-300' : 'bg-amber-500/25 text-amber-200'
+						]}>
+							{profile.planReady ? 'Activo' : 'Pendiente'}
+						</span>
+					</a>
+				);
+			})
+		}
+	</div>
+</div>

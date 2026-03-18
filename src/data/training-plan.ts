@@ -18,7 +18,12 @@ export const sessionBlocks = [
 		duration: 15,
 		intensity: 'RPE 4-5',
 		focus: 'Elevar temperatura, preparar tobillo, rodilla, cadera y hombro antes de mover carga.',
-		prescription: 'Cinta con 2% de inclinacion y ritmo moderado. Busca respiracion estable y zancada corta, no velocidad.'
+		prescription: 'Cinta con 2% de inclinacion y ritmo moderado. Busca respiracion estable y zancada corta, no velocidad.',
+		checkpoints: [
+			'Primeros 5 minutos para entrar en calor sin jadeo',
+			'Mantene hombros relajados y mirada al frente',
+			'Si la respiracion se acelera de golpe, baja ritmo un punto'
+		]
 	},
 	{
 		id: 'B',
@@ -26,7 +31,12 @@ export const sessionBlocks = [
 		duration: 15,
 		intensity: 'RPE 6-7',
 		focus: 'Reforzar dorsales, pectoral y posicion escapular para contrarrestar la postura de escritorio.',
-		prescription: 'Lat Pulldown 3x12 y Chest Press 3x12. Controla el final de cada repeticion y evita tirones.'
+		prescription: 'Lat Pulldown 3x12 y Chest Press 3x12. Controla el final de cada repeticion y evita tirones.',
+		checkpoints: [
+			'Escapulas estables antes de iniciar cada repeticion',
+			'Si perdes tecnica en las ultimas reps, baja carga',
+			'Mantene descansos de 60-75 segundos'
+		]
 	},
 	{
 		id: 'C',
@@ -34,7 +44,12 @@ export const sessionBlocks = [
 		duration: 12,
 		intensity: 'RPE 6-7',
 		focus: 'Sumar trabajo de piernas con apoyo guiado y enfasis en fase excentrica.',
-		prescription: 'Leg Press 3x15 con descenso lento de 2-3 segundos. No bloquees rodillas al extender.'
+		prescription: 'Leg Press 3x15 con descenso lento de 2-3 segundos. No bloquees rodillas al extender.',
+		checkpoints: [
+			'Talones apoyados todo el recorrido',
+			'Bajada controlada de 2-3 segundos',
+			'Rodillas alineadas con la punta de los pies'
+		]
 	},
 	{
 		id: 'D',
@@ -42,7 +57,12 @@ export const sessionBlocks = [
 		duration: 8,
 		intensity: 'RPE 5-6',
 		focus: 'Crear rigidez abdominal para mejorar transferencia y proteger la zona lumbar.',
-		prescription: 'Plancha abdominal 3 x 20-30 segundos. Mantene costillas abajo y gluteos apretados.'
+		prescription: 'Plancha abdominal 3 x 20-30 segundos. Mantene costillas abajo y gluteos apretados.',
+		checkpoints: [
+			'Costillas abajo y pelvis neutra',
+			'No dejes caer la zona lumbar',
+			'Corta la serie antes de perder alineacion'
+		]
 	},
 	{
 		id: 'E',
@@ -50,7 +70,12 @@ export const sessionBlocks = [
 		duration: 10,
 		intensity: 'RPE 3-4',
 		focus: 'Bajar pulsaciones, sostener movilidad y salir sin sensacion de choque.',
-		prescription: 'Eliptica o bicicleta fija a baja intensidad. El objetivo es recuperar, no sumar castigo.'
+		prescription: 'Eliptica o bicicleta fija a baja intensidad. El objetivo es recuperar, no sumar castigo.',
+		checkpoints: [
+			'Ritmo facil y respiracion por nariz cuando sea posible',
+			'Hidratarse al finalizar este bloque',
+			'No cerrar la sesion con sensacion de agotamiento'
+		]
 	}
 ];
 
@@ -78,6 +103,8 @@ export const weeklySchedule = [
 export const exercises = [
 	{
 		name: 'Lat Pulldown',
+		nameEsAr: 'Jalon al pecho en polea',
+		searchAliasesEsAr: ['Jalon al pecho', 'Polea al pecho', 'Dorsalera'],
 		block: 'Bloque B',
 		machine: 'Polea al pecho en maquina guiada',
 		sets: 3,
@@ -87,10 +114,21 @@ export const exercises = [
 		beginnerTip: 'Pensa en bajar los codos hacia los bolsillos. Si el cuello se tensa, el peso es demasiado alto.',
 		cues: ['Pecho arriba', 'Barra al pecho alto', 'No balancear el torso'],
 		riskNote: 'Evita hiperextender la espalda para terminar la repeticion.',
-		learningLoad: 58
+		learningLoad: 58,
+		imageUrl: '/exercises/lat-pulldown.svg',
+		videoUrl: 'https://www.youtube.com/results?search_query=lat+pulldown+machine+tutorial',
+		howTo: [
+			'Ajusta el apoyo de piernas para que los muslos queden fijos.',
+			'Inicia con pecho alto y hombros lejos de las orejas.',
+			'Baja la barra al pecho alto guiando con codos.',
+			'Sube la barra en control sin soltar tension.'
+		],
+		commonMistakes: ['Inclinar demasiado el torso hacia atras', 'Tirar con biceps y encoger hombros', 'Rebotar la barra en cada repeticion']
 	},
 	{
 		name: 'Chest Press',
+		nameEsAr: 'Press de pecho en maquina',
+		searchAliasesEsAr: ['Press de pecho', 'Pecho en maquina', 'Press horizontal'],
 		block: 'Bloque B',
 		machine: 'Maquina de pecho con respaldo',
 		sets: 3,
@@ -100,10 +138,21 @@ export const exercises = [
 		beginnerTip: 'Manten hombros abajo y atras. Si el hombro se adelanta al final, recorta carga.',
 		cues: ['Pies firmes', 'Munecas neutras', 'Controla el regreso'],
 		riskNote: 'No rebotes ni empujes con la cabeza despegandose del respaldo.',
-		learningLoad: 55
+		learningLoad: 55,
+		imageUrl: '/exercises/chest-press.svg',
+		videoUrl: 'https://www.youtube.com/results?search_query=chest+press+machine+form',
+		howTo: [
+			'Ajusta el asiento para que las manijas queden a mitad del pecho.',
+			'Apoya espalda y pies firmes antes de empujar.',
+			'Empuja en linea recta sin bloquear codos al final.',
+			'Regresa lento manteniendo control del hombro.'
+		],
+		commonMistakes: ['Abrir codos en exceso', 'Despegar la espalda del respaldo', 'Bajar demasiado rapido en la fase de retorno']
 	},
 	{
 		name: 'Leg Press',
+		nameEsAr: 'Prensa de piernas',
+		searchAliasesEsAr: ['Prensa 45', 'Prensa horizontal', 'Leg press'],
 		block: 'Bloque C',
 		machine: 'Prensa inclinada o horizontal',
 		sets: 3,
@@ -113,10 +162,21 @@ export const exercises = [
 		beginnerTip: 'Baja hasta donde puedas mantener talones apoyados y zona lumbar estable.',
 		cues: ['Rodillas siguen la punta del pie', 'Talones pegados', 'Bajada lenta'],
 		riskNote: 'No bloquees completamente las rodillas en la extension.',
-		learningLoad: 64
+		learningLoad: 64,
+		imageUrl: '/exercises/leg-press.svg',
+		videoUrl: 'https://www.youtube.com/results?search_query=leg+press+machine+proper+form',
+		howTo: [
+			'Ubica pies al ancho de hombros en la plataforma.',
+			'Desbloquea seguro y baja con control de 2-3 segundos.',
+			'Empuja con talones y mediopie sin levantar cadera.',
+			'Extiende sin bloquear por completo las rodillas.'
+		],
+		commonMistakes: ['Despegar talones de la plataforma', 'Llevar rodillas hacia adentro', 'Bloquear rodillas con impulso']
 	},
 	{
 		name: 'Plank',
+		nameEsAr: 'Plancha abdominal',
+		searchAliasesEsAr: ['Plancha', 'Planchita', 'Plank'],
 		block: 'Bloque D',
 		machine: 'Peso corporal',
 		sets: 3,
@@ -126,7 +186,16 @@ export const exercises = [
 		beginnerTip: 'Acorta la duracion antes de perder alineacion. La plancha buena vale mas que la plancha larga.',
 		cues: ['Costillas abajo', 'Gluteos activos', 'Cuello neutro'],
 		riskNote: 'Si la lumbar colapsa, termina la serie.',
-		learningLoad: 52
+		learningLoad: 52,
+		imageUrl: '/exercises/plank.svg',
+		videoUrl: 'https://www.youtube.com/results?search_query=plank+exercise+proper+form',
+		howTo: [
+			'Apoya antebrazos justo debajo de hombros.',
+			'Aprieta gluteos y abdomen antes de despegar rodillas.',
+			'Mantene linea recta de cabeza a tobillos.',
+			'Respira corto y controlado durante todo el tiempo.'
+		],
+		commonMistakes: ['Dejar caer la pelvis', 'Levantar demasiado la cadera', 'Aguantar la respiracion']
 	}
 ];
 

@@ -22,6 +22,12 @@ const {
 		<meta name="generator" content={Astro.generator} />
 		<meta name="description" content={description} />
 		<meta name="theme-color" content="#165d48" />
+		<script is:inline>
+			const savedTheme = localStorage.getItem('onfit-theme');
+			if (savedTheme) {
+				document.documentElement.dataset.theme = savedTheme;
+			}
+		</script>
 		<title>{title}</title>
 	</head>
 	<body>

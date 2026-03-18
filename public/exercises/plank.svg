@@ -1,0 +1,24 @@
+<svg viewBox="0 0 1200 700" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Plancha abdominal</title>
+  <desc id="desc">Ilustracion de persona realizando plancha abdominal en el suelo.</desc>
+  <defs>
+    <linearGradient id="bg4" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#252526"/>
+      <stop offset="100%" stop-color="#1e1e1e"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="700" fill="url(#bg4)"/>
+  <rect x="140" y="520" width="920" height="24" rx="12" fill="#3c3c40"/>
+  <circle cx="820" cy="390" r="36" fill="#f2c9a1"/>
+  <rect x="520" y="390" width="320" height="52" rx="26" fill="#c586c0"/>
+  <line x1="520" y1="418" x2="390" y2="440" stroke="#c586c0" stroke-width="44" stroke-linecap="round"/>
+  <line x1="830" y1="424" x2="970" y2="455" stroke="#9da5b4" stroke-width="34" stroke-linecap="round"/>
+  <line x1="410" y1="440" x2="370" y2="520" stroke="#9da5b4" stroke-width="20" stroke-linecap="round"/>
+  <line x1="380" y1="444" x2="340" y2="520" stroke="#9da5b4" stroke-width="20" stroke-linecap="round"/>
+  <line x1="950" y1="455" x2="920" y2="520" stroke="#9da5b4" stroke-width="20" stroke-linecap="round"/>
+  <line x1="980" y1="460" x2="960" y2="520" stroke="#9da5b4" stroke-width="20" stroke-linecap="round"/>
+  <rect x="95" y="70" width="430" height="180" rx="22" fill="#252526" stroke="#c586c0" stroke-opacity="0.55"/>
+  <text x="125" y="125" font-size="40" fill="#c586c0" font-family="Segoe UI, sans-serif" font-weight="700">Plank</text>
+  <text x="125" y="175" font-size="28" fill="#d4d4d4" font-family="Segoe UI, sans-serif">Plancha abdominal</text>
+  <text x="125" y="220" font-size="22" fill="#9da5b4" font-family="Segoe UI, sans-serif">Linea recta · Core activo · Sin colapso lumbar</text>
+</svg>

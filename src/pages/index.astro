@@ -3,6 +3,7 @@ import {
 	Activity,
 	Brain,
 	CalendarDays,
+	CirclePlay,
 	Clock3,
 	Droplets,
 	Dumbbell,
@@ -20,6 +21,8 @@ import {
 } from 'lucide-react';
 import ExerciseTabs from '../components/ExerciseTabs';
 import GymIllustration from '../components/GymIllustration.astro';
+import ThemeSwitcher from '../components/ThemeSwitcher';
+import TrainingBlocksGrid from '../components/TrainingBlocksGrid';
 import SessionCharts from '../components/charts/SessionCharts';
 import {
 	athleteProfile,
@@ -27,7 +30,6 @@ import {
 	exercises,
 	habitGuides,
 	progressionRules,
-	sessionBlocks,
 	weeklySchedule
 } from '../data/training-plan';
 import Layout from '../layouts/Layout.astro';
@@ -89,6 +91,10 @@ const habitIcons = {
 
 <Layout>
 	<main class="mx-auto flex min-h-screen max-w-7xl flex-col gap-12 px-4 py-6 sm:px-6 lg:px-8 lg:py-8">
+		<section class="flex justify-end">
+			<ThemeSwitcher client:load />
+		</section>
+
 		<section class="grid gap-6 lg:grid-cols-[1.1fr_0.9fr] lg:items-stretch">
 			<div class="relative overflow-hidden rounded-[2rem] border border-border/70 bg-card/85 p-6 shadow-[0_24px_80px_rgba(18,38,31,0.14)] backdrop-blur xl:p-8">
 				<div class="absolute inset-x-0 top-0 h-32 bg-[radial-gradient(circle_at_top,rgba(240,139,75,0.22),transparent_68%)]"></div>
@@ -219,28 +225,7 @@ const habitIcons = {
 				</p>
 			</div>
 
-			<div class="grid gap-4 xl:grid-cols-5">
-				{
-					sessionBlocks.map((block) => (
-						<article class="rounded-[1.5rem] border border-border/70 bg-card/80 p-5 shadow-[0_10px_30px_rgba(18,38,31,0.06)]">
-							<div class="flex items-center justify-between gap-3">
-								<span class="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-primary/10 text-sm font-semibold text-primary">
-									{block.id}
-								</span>
-								<span class="rounded-full border border-border bg-background/70 px-3 py-1 text-xs font-medium text-muted-foreground">
-									{block.duration} min
-								</span>
-							</div>
-							<h3 class="mt-4 text-xl font-semibold tracking-[-0.03em] text-foreground">{block.name}</h3>
-							<p class="mt-2 text-sm font-medium text-primary">{block.intensity}</p>
-							<p class="mt-4 text-sm leading-6 text-muted-foreground">{block.focus}</p>
-							<p class="mt-4 rounded-[1.25rem] border border-border/70 bg-background/80 p-3 text-sm leading-6 text-foreground/86">
-								{block.prescription}
-							</p>
-						</article>
-					))
-				}
-			</div>
+			<TrainingBlocksGrid client:load />
 		</section>
 
 		<section class="space-y-5">
@@ -263,6 +248,12 @@ const habitIcons = {
 
 						return (
 							<article class="rounded-[1.75rem] border border-border/70 bg-card/80 p-5 shadow-[0_10px_30px_rgba(18,38,31,0.06)]">
+								<img
+									src={exercise.imageUrl}
+									alt={`Referencia visual de ${exercise.nameEsAr}`}
+									loading="lazy"
+									class="h-40 w-full rounded-[1.1rem] object-cover"
+								/>
 								<div class="flex items-start justify-between gap-4">
 									<span class="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary">
 										<Icon className="h-5 w-5" />
@@ -271,8 +262,9 @@ const habitIcons = {
 										{exercise.block}
 									</span>
 								</div>
-								<h3 class="mt-4 text-xl font-semibold tracking-[-0.03em] text-foreground">{exercise.name}</h3>
-								<p class="mt-2 text-sm text-muted-foreground">{exercise.machine}</p>
+								<h3 class="mt-4 text-xl font-semibold tracking-[-0.03em] text-foreground">{exercise.nameEsAr}</h3>
+								<p class="mt-1 text-sm text-muted-foreground">{exercise.name}</p>
+								<p class="mt-1 text-sm text-muted-foreground">{exercise.machine}</p>
 								<div class="mt-4 flex flex-wrap gap-2 text-xs font-medium text-foreground/76">
 									<span class="rounded-full bg-secondary px-3 py-1">{exercise.sets} series</span>
 									<span class="rounded-full bg-secondary px-3 py-1">{exercise.reps} reps</span>
@@ -282,6 +274,26 @@ const habitIcons = {
 								<p class="mt-4 rounded-[1.25rem] border border-border/70 bg-background/80 p-3 text-sm leading-6 text-muted-foreground">
 									{exercise.beginnerTip}
 								</p>
+								<p class="mt-3 text-xs leading-5 text-muted-foreground">
+									Buscar en gym: {exercise.searchAliasesEsAr.join(' · ')}
+								</p>
+								<div class="mt-4 grid gap-2 sm:grid-cols-2">
+									<a
+										href={exercise.videoUrl}
+										target="_blank"
+										rel="noreferrer"
+										class="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-3 py-2 text-sm font-semibold text-primary-foreground transition hover:bg-primary/90"
+									>
+										<CirclePlay className="h-4 w-4" />
+										Video ejemplo
+									</a>
+									<a
+										href="#reglas"
+										class="inline-flex items-center justify-center rounded-full border border-border bg-background px-3 py-2 text-sm font-semibold text-foreground transition hover:border-primary/40"
+									>
+										Info tecnica
+									</a>
+								</div>
 							</article>
 						);
 					})

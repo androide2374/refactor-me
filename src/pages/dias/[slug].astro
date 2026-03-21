@@ -1,8 +1,7 @@
 ---
 import { ArrowLeft, ArrowRight, Clock3, Dumbbell, Info, Layers3, Target } from 'lucide-react';
 
-import ProfileSwitcher from '../../components/ProfileSwitcher.astro';
-import ThemeSwitcher from '../../components/ThemeSwitcher';
+import AppHeader from '../../components/AppHeader.astro';
 import { exercises, getDayTotalMinutes, trainingDays } from '../../data/training-plan';
 import Layout from '../../layouts/Layout.astro';
 
@@ -32,10 +31,7 @@ const exercisesByBlock = dayPlan.blocks.reduce((accumulator: Record<string, type
 
 <Layout title={`OnFit Focus | ${dayPlan.label} ${dayPlan.colorName}`} description={`Detalle completo de ${dayPlan.label} con bloques y ejercicios con foto.`}>
     <main class="mx-auto flex min-h-screen max-w-7xl flex-col gap-8 px-4 py-6 sm:px-6 lg:px-8 lg:py-8">
-        <section class="flex flex-col justify-end gap-2 sm:flex-row sm:items-center">
-            <ProfileSwitcher currentProfile="yo" />
-            <ThemeSwitcher client:load />
-        </section>
+        <AppHeader currentProfile="yo" />
 
         <section class="relative overflow-hidden rounded-[2rem] border border-border/70 bg-card/85 p-6 shadow-[0_24px_80px_rgba(18,38,31,0.12)] sm:p-8">
             <div class="absolute inset-x-0 top-0 h-1.5" style={`background:${dayPlan.colorHex}`}></div>

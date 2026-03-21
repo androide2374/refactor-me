@@ -1,7 +1,6 @@
 ---
 import { CalendarDays, ClipboardList, Clock3, Gauge, Heart, Ruler, Scale } from 'lucide-react';
-import ProfileSwitcher from '../../components/ProfileSwitcher.astro';
-import ThemeSwitcher from '../../components/ThemeSwitcher';
+import AppHeader from '../../components/AppHeader.astro';
 import { partnerProfile } from '../../data/training-plan';
 import Layout from '../../layouts/Layout.astro';
 
@@ -17,10 +16,7 @@ const profileStats = [
 
 <Layout title="OnFit Focus | Perfil pareja" description="Perfil de pareja creado y listo para cargar su plan cuando esten completos los datos de entrenamiento.">
 	<main class="mx-auto flex min-h-screen max-w-5xl flex-col gap-10 px-4 py-6 sm:px-6 lg:px-8 lg:py-8">
-		<section class="flex flex-col justify-end gap-2 sm:flex-row sm:items-center">
-			<ProfileSwitcher currentProfile="pareja" />
-			<ThemeSwitcher client:load />
-		</section>
+		<AppHeader currentProfile="pareja" />
 
 		<section class="rounded-[2rem] border border-border/70 bg-card/85 p-6 shadow-[0_24px_80px_rgba(18,38,31,0.14)] backdrop-blur sm:p-8">
 			<p class="inline-flex items-center gap-2 rounded-full border border-amber-300/40 bg-amber-400/15 px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-amber-200">

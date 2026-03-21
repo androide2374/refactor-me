@@ -1,0 +1,27 @@
+---
+import appIcon from '../assets/astro.svg';
+import ProfileSwitcher from './ProfileSwitcher.astro';
+import ThemeSwitcher from './ThemeSwitcher';
+
+interface Props {
+	currentProfile: 'yo' | 'pareja';
+}
+
+const { currentProfile } = Astro.props;
+---
+
+<section class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+	<a
+		href="/"
+		class="inline-flex items-center gap-3 self-start rounded-[1.25rem] border border-border/70 bg-card/80 px-3 py-2 text-sm font-semibold text-foreground transition hover:border-primary/35 hover:bg-background/85"
+		aria-label="Volver al inicio"
+	>
+		<img src={appIcon.src} alt="OnFit Focus" class="h-8 w-8 rounded-lg bg-background/80 p-1" />
+		<span class="text-sm font-semibold tracking-[-0.02em] text-foreground">Inicio</span>
+	</a>
+
+	<div class="flex flex-col justify-end gap-2 sm:flex-row sm:items-center">
+		<ProfileSwitcher currentProfile={currentProfile} />
+		<ThemeSwitcher client:load />
+	</div>
+</section>

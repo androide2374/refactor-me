@@ -2,13 +2,14 @@
 
 import { ArrowUpRight, Clock3, Layers3 } from 'lucide-react';
 
-import { exercises, trainingDays } from '../data/training-plan';
+import { exercises, getDayTotalMinutes, trainingDays } from '../data/training';
 
 export default function TrainingBlocksGrid() {
     return (
         <div className="grid gap-4 lg:grid-cols-3">
             {trainingDays.map((day) => {
                 const dayExercises = exercises.filter((exercise) => day.exerciseOrder.includes(exercise.name));
+                const totalMinutes = getDayTotalMinutes(day);
 
                 return (
                     <article
@@ -31,7 +32,7 @@ export default function TrainingBlocksGrid() {
                             </div>
                             <span className="inline-flex items-center gap-1 rounded-full border border-border bg-background/70 px-3 py-1 text-xs font-medium text-muted-foreground">
                                 <Clock3 className="h-3.5 w-3.5" />
-                                60 min
+                                {totalMinutes} min
                             </span>
                         </div>
 

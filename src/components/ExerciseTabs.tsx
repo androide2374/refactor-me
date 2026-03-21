@@ -58,6 +58,12 @@ export default function ExerciseTabs() {
                                     <div className="rounded-[1.15rem] border border-border/70 bg-card/80 p-3 text-sm leading-6 text-muted-foreground">
                                         Checklist minima: agua lista, desayuno liviano, zapatillas estables y cero prisa entre series.
                                     </div>
+                                    <a
+                                        href={session.href}
+                                        className="inline-flex w-full items-center justify-center rounded-full border border-border bg-background px-3 py-2 text-sm font-semibold text-foreground transition hover:border-primary/35"
+                                    >
+                                        Abrir pagina del dia
+                                    </a>
                                 </CardContent>
                             </Card>
                         ))}
@@ -74,11 +80,11 @@ export default function ExerciseTabs() {
                                         alt={`Referencia visual de ${exercise.nameEsAr}`}
                                         loading="lazy"
                                         onError={(event) => {
-										const img = event.currentTarget;
-										if (img.src !== exercise.imageFallbackUrl) {
-											img.src = exercise.imageFallbackUrl;
-										}
-									}}
+                                            const img = event.currentTarget;
+                                            if (img.src !== exercise.imageFallbackUrl) {
+                                                img.src = exercise.imageFallbackUrl;
+                                            }
+                                        }}
                                         className="h-40 w-full rounded-[1.1rem] object-cover"
                                     />
                                     <div className="flex items-center justify-between gap-3">
@@ -97,9 +103,9 @@ export default function ExerciseTabs() {
                                         <Progress value={exercise.learningLoad} />
                                     </div>
                                     <div className="grid gap-2 text-sm text-foreground/86">
-										<p>
-											<strong>Como lo buscas en el gym:</strong> {exercise.searchAliasesEsAr.join(' · ')}.
-										</p>
+                                        <p>
+                                            <strong>Como lo buscas en el gym:</strong> {exercise.searchAliasesEsAr.join(' · ')}.
+                                        </p>
                                         <p>
                                             <strong>Prescripcion:</strong> {exercise.sets} series x {exercise.reps === 1 ? '20-30 segundos' : `${exercise.reps} repeticiones`}.
                                         </p>
@@ -198,17 +204,17 @@ export default function ExerciseTabs() {
                             alt={`Demostracion ${selectedExercise.nameEsAr}`}
                             loading="lazy"
                             onError={(event) => {
-							const img = event.currentTarget;
-							if (img.src !== selectedExercise.imageFallbackUrl) {
-								img.src = selectedExercise.imageFallbackUrl;
-							}
-						}}
+                                const img = event.currentTarget;
+                                if (img.src !== selectedExercise.imageFallbackUrl) {
+                                    img.src = selectedExercise.imageFallbackUrl;
+                                }
+                            }}
                             className="mt-4 h-52 w-full rounded-[1.15rem] object-cover"
                         />
 
-						<div className="mt-4 rounded-[1.2rem] border border-border/70 bg-background/70 p-4 text-sm leading-6 text-foreground/88">
-							<strong>Nombres para buscar:</strong> {selectedExercise.searchAliasesEsAr.join(' · ')}.
-						</div>
+                        <div className="mt-4 rounded-[1.2rem] border border-border/70 bg-background/70 p-4 text-sm leading-6 text-foreground/88">
+                            <strong>Nombres para buscar:</strong> {selectedExercise.searchAliasesEsAr.join(' · ')}.
+                        </div>
 
                         <div className="mt-4 grid gap-3 sm:grid-cols-2">
                             <div className="rounded-[1.2rem] border border-border/70 bg-background/70 p-4">

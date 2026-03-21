@@ -217,13 +217,13 @@ const habitIcons = {
 		<section id="plan-de-hoy" class="space-y-5">
 			<div class="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
 				<div>
-					<p class="text-sm font-semibold uppercase tracking-[0.18em] text-primary">Sesion base</p>
+					<p class="text-sm font-semibold uppercase tracking-[0.18em] text-primary">Dias de entrenamiento</p>
 					<h2 class="mt-2 text-3xl font-semibold tracking-[-0.04em] text-foreground sm:text-4xl">
-						Que hacer durante los 60 minutos
+						Tu semana en 3 paginas especificas
 					</h2>
 				</div>
 				<p class="max-w-2xl text-sm leading-6 text-muted-foreground">
-					Cada bloque tiene un objetivo biomecanico claro: elevar temperatura, mover carga con control, estabilizar el core y bajar revoluciones antes de volver al trabajo.
+					Cada card representa un dia completo con su color, sus bloques internos y acceso directo a su pagina con ejercicios y fotos.
 				</p>
 			</div>
 
@@ -246,7 +246,7 @@ const habitIcons = {
 			<div class="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
 				{
 					exercises.map((exercise, index) => {
-						const Icon = exerciseIcons[index];
+						const Icon = exerciseIcons[index % exerciseIcons.length] ?? Dumbbell;
 
 						return (
 							<article class="rounded-[1.75rem] border border-border/70 bg-card/80 p-5 shadow-[0_10px_30px_rgba(18,38,31,0.06)]">
@@ -331,12 +331,14 @@ const habitIcons = {
 				<div class="mt-6 grid gap-4 md:grid-cols-3">
 					{
 						weeklySchedule.map((day) => (
-							<article class="rounded-[1.5rem] border border-border/70 bg-background/70 p-4">
+							<a href={day.href} class="rounded-[1.5rem] border border-border/70 bg-background/70 p-4 transition hover:border-primary/35 hover:bg-background/85">
+								<span class="mb-3 block h-1.5 w-full rounded-full" style={`background:${day.colorHex}`}></span>
 								<p class="text-sm font-semibold text-primary">{day.day}</p>
 								<h3 class="mt-2 text-lg font-semibold text-foreground">{day.label}</h3>
 								<p class="mt-3 text-sm font-medium text-foreground/86">{day.focus}</p>
 								<p class="mt-3 text-sm leading-6 text-muted-foreground">{day.note}</p>
-							</article>
+								<p class="mt-4 text-xs font-semibold uppercase tracking-[0.12em] text-primary">Abrir pagina del dia</p>
+							</a>
 						))
 					}
 				</div>

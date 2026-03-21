@@ -1,0 +1,145 @@
+---
+import { ArrowLeft, ArrowRight, Clock3, Dumbbell, Layers3, Target } from 'lucide-react';
+
+import ProfileSwitcher from '../../components/ProfileSwitcher.astro';
+import ThemeSwitcher from '../../components/ThemeSwitcher';
+import { exercises, trainingDays } from '../../data/training-plan';
+import Layout from '../../layouts/Layout.astro';
+
+export function getStaticPaths() {
+    return trainingDays.map((dayPlan) => ({
+        params: { slug: dayPlan.slug },
+        props: { dayPlan }
+    }));
+}
+
+const { dayPlan } = Astro.props;
+const dayIndex = trainingDays.findIndex((item) => item.id === dayPlan.id);
+const nextDay = trainingDays[(dayIndex + 1) % trainingDays.length];
+const previousDay = trainingDays[(dayIndex - 1 + trainingDays.length) % trainingDays.length];
+
+const dayExercises = dayPlan.exerciseOrder
+    .map((exerciseName: string) => exercises.find((exercise) => exercise.name === exerciseName))
+    .filter((exercise): exercise is (typeof exercises)[number] => Boolean(exercise));
+
+const totalSets = dayExercises.reduce((accumulator, exercise) => accumulator + exercise.sets, 0);
+---
+
+<Layout title={`OnFit Focus | ${dayPlan.label} ${dayPlan.colorName}`} description={`Detalle completo de ${dayPlan.label} con bloques y ejercicios con foto.`}>
+    <main class="mx-auto flex min-h-screen max-w-7xl flex-col gap-8 px-4 py-6 sm:px-6 lg:px-8 lg:py-8">
+        <section class="flex flex-col justify-end gap-2 sm:flex-row sm:items-center">
+            <ProfileSwitcher currentProfile="yo" />
+            <ThemeSwitcher client:load />
+        </section>
+
+        <section class="relative overflow-hidden rounded-[2rem] border border-border/70 bg-card/85 p-6 shadow-[0_24px_80px_rgba(18,38,31,0.12)] sm:p-8">
+            <div class="absolute inset-x-0 top-0 h-1.5" style={`background:${dayPlan.colorHex}`}></div>
+
+            <div class="flex flex-wrap items-center gap-2">
+                <span class="inline-flex items-center gap-2 rounded-full border border-border bg-background/80 px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+                    <Clock3 className="h-3.5 w-3.5" />
+                    {dayPlan.day} · 60 min
+                </span>
+                <span class="inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em]" style={`background:${dayPlan.colorHex}22;color:${dayPlan.colorHex}`}>
+                    <Target className="h-3.5 w-3.5" />
+                    {dayPlan.label} · {dayPlan.colorName}
+                </span>
+            </div>
+
+            <h1 class="mt-4 text-4xl font-semibold tracking-[-0.04em] text-foreground sm:text-5xl">{dayPlan.title}</h1>
+            <p class="mt-3 max-w-3xl text-base leading-7 text-muted-foreground">{dayPlan.focus}</p>
+
+            <div class="mt-6 grid gap-3 sm:grid-cols-3">
+                <article class="rounded-[1.2rem] border border-border/70 bg-background/75 p-4">
+                    <p class="text-sm text-muted-foreground">Bloques</p>
+                    <p class="mt-1 text-2xl font-semibold text-foreground">{dayPlan.blocks.length}</p>
+                </article>
+                <article class="rounded-[1.2rem] border border-border/70 bg-background/75 p-4">
+                    <p class="text-sm text-muted-foreground">Ejercicios</p>
+                    <p class="mt-1 text-2xl font-semibold text-foreground">{dayExercises.length}</p>
+                </article>
+                <article class="rounded-[1.2rem] border border-border/70 bg-background/75 p-4">
+                    <p class="text-sm text-muted-foreground">Series totales</p>
+                    <p class="mt-1 text-2xl font-semibold text-foreground">{totalSets}</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="space-y-4">
+            <div class="flex items-end justify-between gap-3">
+                <div>
+                    <p class="text-sm font-semibold uppercase tracking-[0.18em] text-primary">Bloques del dia</p>
+                    <h2 class="mt-1 text-3xl font-semibold tracking-[-0.04em] text-foreground">Estructura de la sesion</h2>
+                </div>
+            </div>
+            <div class="grid gap-4 lg:grid-cols-4">
+                {
+                    dayPlan.blocks.map((block) => (
+                        <article class="rounded-[1.4rem] border border-border/70 bg-card/80 p-4 shadow-[0_10px_30px_rgba(18,38,31,0.05)]">
+                            <div class="flex items-center justify-between gap-2">
+                                <span class="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-primary/10 text-sm font-semibold text-primary">{block.id}</span>
+                                <span class="rounded-full border border-border bg-background/70 px-2.5 py-1 text-xs text-muted-foreground">{block.duration} min</span>
+                            </div>
+                            <h3 class="mt-3 text-lg font-semibold text-foreground">{block.name}</h3>
+                            <p class="mt-1 text-xs font-semibold uppercase tracking-[0.12em]" style={`color:${dayPlan.colorHex}`}>{block.intensity}</p>
+                            <p class="mt-3 text-sm leading-6 text-muted-foreground">{block.prescription}</p>
+                        </article>
+                    ))
+                }
+            </div>
+        </section>
+
+        <section class="space-y-4">
+            <div>
+                <p class="text-sm font-semibold uppercase tracking-[0.18em] text-primary">Ejercicios con foto</p>
+                <h2 class="mt-1 text-3xl font-semibold tracking-[-0.04em] text-foreground">Trabajo especifico de {dayPlan.label}</h2>
+                <p class="mt-2 text-sm leading-6 text-muted-foreground">{dayPlan.note}</p>
+            </div>
+            <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+                {
+                    dayExercises.map((exercise) => (
+                        <article class="rounded-[1.6rem] border border-border/70 bg-card/80 p-4 shadow-[0_10px_30px_rgba(18,38,31,0.06)]">
+                            <img
+                                src={exercise.imageUrl}
+                                alt={`Referencia visual de ${exercise.nameEsAr}`}
+                                loading="lazy"
+                                onerror={`if (this.src !== '${exercise.imageFallbackUrl}') this.src='${exercise.imageFallbackUrl}'`}
+                                class="h-44 w-full rounded-[1rem] object-cover"
+                            />
+                            <div class="mt-3 flex items-start justify-between gap-3">
+                                <div>
+                                    <h3 class="text-lg font-semibold text-foreground">{exercise.nameEsAr}</h3>
+                                    <p class="text-sm text-muted-foreground">{exercise.machine}</p>
+                                </div>
+                                <span class="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                                    <Dumbbell className="h-4 w-4" />
+                                </span>
+                            </div>
+                            <div class="mt-3 flex flex-wrap gap-2 text-xs font-medium text-foreground/80">
+                                <span class="rounded-full bg-secondary px-3 py-1">{exercise.sets} series</span>
+                                <span class="rounded-full bg-secondary px-3 py-1">{exercise.reps === 1 ? '20-30 seg' : `${exercise.reps} reps`}</span>
+                                <span class="rounded-full bg-secondary px-3 py-1">{exercise.restSeconds}s desc</span>
+                            </div>
+                            <p class="mt-3 text-sm leading-6 text-muted-foreground">{exercise.beginnerTip}</p>
+                        </article>
+                    ))
+                }
+            </div>
+        </section>
+
+        <section class="grid gap-3 sm:grid-cols-3">
+            <a href="/" class="inline-flex items-center justify-center gap-2 rounded-full border border-border bg-background px-4 py-2.5 text-sm font-semibold text-foreground transition hover:border-primary/30">
+                <ArrowLeft className="h-4 w-4" />
+                Volver al inicio
+            </a>
+            <a href={`/dias/${previousDay.slug}`} class="inline-flex items-center justify-center gap-2 rounded-full border border-border bg-background px-4 py-2.5 text-sm font-semibold text-foreground transition hover:border-primary/30">
+                <Layers3 className="h-4 w-4" />
+                Dia anterior
+            </a>
+            <a href={`/dias/${nextDay.slug}`} class="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground transition hover:bg-primary/90">
+                Siguiente dia
+                <ArrowRight className="h-4 w-4" />
+            </a>
+        </section>
+    </main>
+</Layout>

@@ -25,6 +25,7 @@ interface WeightStoreState {
     _hydrated: boolean;
 
     init: () => Promise<void>;
+    refresh: () => Promise<void>;
     addRecord: (record: Omit<WeightRecord, 'id' | '_synced'>) => Promise<void>;
     getRecords: (userId: string, exerciseName: string) => WeightRecord[];
     getLastRecord: (userId: string, exerciseName: string) => WeightRecord | undefined;
@@ -76,7 +77,7 @@ export const useWeightStore = create<WeightStoreState>()(
                         const { data: remoteRecords } = await supabase
                             .from('weight_records')
                             .select('*')
-                            .order('created_at', { ascending: false })
+                            .order('date', { ascending: false })
                             .limit(500);
 
                         if (remoteRecords && remoteRecords.length > 0) {
@@ -102,6 +103,39 @@ export const useWeightStore = create<WeightStoreState>()(
                 }
 
                 set({ _hydrated: true });
+            },
+
+            refresh: async () => {
+                try {
+                    const { data: remoteRecords } = await supabase
+                        .from('weight_records')
+                        .select('*')
+                        .order('date', { ascending: false })
+                        .limit(500);
+
+                    if (remoteRecords && remoteRecords.length > 0) {
+                        const remote: WeightRecord[] = remoteRecords.map((r: Record<string, unknown>) => ({
+                            id: r.id as string,
+                            userId: r.user_id as string,
+                            date: r.date as string,
+                            exerciseName: r.exercise_name as string,
+                            sets: r.sets as SetEntry[],
+                            notes: (r.notes as string) ?? '',
+                            _synced: true
+                        }));
+
+                        const localRecords = get().records;
+                        const remoteIds = new Set(remote.map((r) => r.id));
+                        const localPending = localRecords.filter((r) => !r._synced);
+                        const localToKeep = localRecords.filter(
+                            (r) => r._synced && !remoteIds.has(r.id)
+                        );
+
+                        set({ records: [...remote, ...localPending, ...localToKeep] });
+                    }
+                } catch {
+                    // silent
+                }
             },
 
             addRecord: async (record) => {

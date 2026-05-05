@@ -1,5 +1,6 @@
 ---
 import DailyWeightPrompt from '../components/DailyWeightPrompt';
+import WeighReminder from '../components/WeighReminder';
 import '../styles/global.css';
 import PWAInstallPrompt from '../components/PWAInstallPrompt';
 import PWAUpdateToast from '../components/PWAUpdateToast';
@@ -40,6 +41,7 @@ const {
 	<body>
 		<slot />
 		<DailyWeightPrompt client:load />
+		<WeighReminder client:load />
 		<PWAInstallPrompt client:load />
 		<PWAUpdateToast client:load />
 	</body>

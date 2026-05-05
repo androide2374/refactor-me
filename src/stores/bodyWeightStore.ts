@@ -16,6 +16,7 @@ interface BodyWeightState {
     _hydrated: boolean;
 
     init: () => Promise<void>;
+    refresh: () => Promise<void>;
     addEntry: (userId: string, weight: number) => void;
     getEntries: (userId: string) => BodyWeightEntry[];
     getTodayEntry: (userId: string) => BodyWeightEntry | undefined;
@@ -95,6 +96,36 @@ export const useBodyWeightStore = create<BodyWeightState>()(
                 }
 
                 set({ _hydrated: true });
+            },
+
+            refresh: async () => {
+                try {
+                    const { data: remote } = await supabase
+                        .from('body_weights')
+                        .select('*')
+                        .order('date', { ascending: false })
+                        .limit(500);
+
+                    if (remote && remote.length > 0) {
+                        const mapped: BodyWeightEntry[] = remote.map((r: Record<string, unknown>) => ({
+                            date: r.date as string,
+                            weight: Number(r.weight),
+                            userId: r.user_id as string,
+                            _synced: true
+                        }));
+
+                        const local = get().entries;
+                        const remoteKeys = new Set(mapped.map((e) => `${e.userId}|${e.date}`));
+                        const localPending = local.filter((e) => !e._synced);
+                        const localToKeep = local.filter(
+                            (e) => e._synced && !remoteKeys.has(`${e.userId}|${e.date}`)
+                        );
+                        const merged = [...mapped, ...localPending, ...localToKeep];
+                        set({ entries: merged });
+                    }
+                } catch {
+                    // silent
+                }
             },
 
             addEntry: (userId: string, weight: number) => {

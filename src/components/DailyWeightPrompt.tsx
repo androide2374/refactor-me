@@ -10,7 +10,7 @@ const PROMPT_KEY = 'onfit-last-weight-prompt';
 
 export default function DailyWeightPrompt() {
     const { user, isAuthenticated, _hasHydrated } = useAuthStore();
-    const { getTodayEntry, addEntry, _hasHydrated: bodyWeightHydrated } = useBodyWeightStore();
+    const { getTodayEntry, addEntry, _hydrated: bodyWeightHydrated } = useBodyWeightStore();
 
     const [show, setShow] = useState(false);
     const [weight, setWeight] = useState('');

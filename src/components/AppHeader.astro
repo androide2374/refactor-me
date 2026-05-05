@@ -1,5 +1,6 @@
 ---
 import appIcon from '../assets/astro.svg';
+import SyncButton from './SyncButton';
 import ThemeSwitcher from './ThemeSwitcher';
 import UserSwitcher from './UserSwitcher';
 ---
@@ -21,6 +22,7 @@ import UserSwitcher from './UserSwitcher';
 		>
 			Progreso
 		</a>
+		<SyncButton client:load />
 		<UserSwitcher client:load />
 		<ThemeSwitcher client:load />
 	</div>

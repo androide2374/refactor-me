@@ -1,186 +1,120 @@
-export const sessionBlocks = [
-    {
-        id: 'A',
-        name: 'Activacion general',
-        duration: 10,
-        intensity: 'RPE 4-5',
-        focus: 'Subir temperatura y preparar articulaciones antes del primer ejercicio con carga.',
-        prescription: '10 minutos de aerobico suave (bici o cinta) + movilidad corta de hombro, cadera y tobillo.',
-        checkpoints: [
-            'Entrar en calor sin jadeo durante 8 a 10 minutos',
-            'No arrancar series pesadas en frio',
-            'Chequea rango sin dolor antes de subir carga'
-        ]
-    },
-    {
-        id: 'B',
-        name: 'Bloque principal',
-        duration: 45,
-        intensity: 'RPE 6-7',
-        focus: 'Ejercicios compuestos del dia para generar el mayor estimulo tecnico y mecanico.',
-        prescription: 'Primeros 2 o 3 ejercicios del dia con descansos de 75 a 90 segundos.',
-        checkpoints: [
-            'Prioriza tecnica sobre carga absoluta',
-            'Respira y recupera entre series',
-            'Controla la fase negativa en 2 segundos'
-        ]
-    },
-    {
-        id: 'C',
-        name: 'Salida aerobica',
-        duration: 15,
-        intensity: 'RPE 3-4',
-        focus: 'Bajar pulsaciones con cardio suave y cerrar la sesion sin corte brusco.',
-        prescription: '15 minutos de aerobico suave en cinta, bici o eliptica.',
-        checkpoints: [
-            'Ritmo conversacional durante toda la salida',
-            'No convertir el cierre en HIIT',
-            'Cierra con respiracion y baja pulsaciones'
-        ]
-    }
-];
+import type { Exercise } from './exercises';
 
-export const trainingDays = [
+export interface TrainingDay {
+    id: string;
+    slug: string;
+    day: string;
+    label: string;
+    colorName: string;
+    colorHex: string;
+    title: string;
+    focus: string;
+    note: string;
+    exerciseOrder: string[];
+    warmup: string[];
+}
+
+export const trainingDays: TrainingDay[] = [
     {
         id: 'day-1',
-        slug: 'dia-1-rojo',
-        day: 'Lunes',
+        slug: 'dia-1',
+        day: 'Dia 1',
         label: 'Dia 1',
-        colorName: 'Rojo',
-        colorHex: '#e3574f',
-        planLabel: 'Dia 1 (Rojo)',
-        title: 'Pecho, espalda, triceps y cuadriceps',
-        focus: 'Empuje y tiron base con cierre de triceps y cuadriceps guiado.',
-        note: 'Orden sugerido: Chest Press, Pec Fly, Low Row, Triceps soga y Leg Extension.',
-        blocks: [
-            {
-                id: 'A',
-                name: 'Activacion',
-                duration: 10,
-                intensity: 'RPE 4-5',
-                prescription: '10 minutos de aerobico suave (cinta o bici) + movilidad de hombro y torax.'
-            },
-            {
-                id: 'B',
-                name: 'Pecho y espalda',
-                duration: 28,
-                intensity: 'RPE 6-7',
-                prescription: 'Chest Press, Pec Fly y Low Row con tempo controlado.'
-            },
-            {
-                id: 'C',
-                name: 'Triceps y cuadriceps',
-                duration: 17,
-                intensity: 'RPE 7',
-                prescription: 'Triceps en soga y Leg Extension sin rebotes.'
-            },
-            {
-                id: 'D',
-                name: 'Salida',
-                duration: 15,
-                intensity: 'RPE 3-4',
-                prescription: '15 minutos de aerobico suave + respiracion e hidratacion final.'
-            }
+        colorName: 'Cian',
+        colorHex: '#00bcd4',
+        title: 'Piernas delante y Hombros',
+        focus: 'Cuadriceps, gemelos y deltoides con ejercicios guiados para ganar fuerza y estabilidad.',
+        note: 'Prioriza rango completo en prensa y control en vuelos laterales. No bloquees rodillas.',
+        exerciseOrder: [
+            'Shoulder Press', 'Rear Delt Fly',
+            'Leg Press 45', 'Leg Extension', 'Calf Raise', 'Sissy Squat', 'Smith Squat',
+            'Plank', 'Heel Touch', 'Side Plank'
         ],
-        exerciseOrder: ['Chest Press', 'Pec Fly', 'Low Row', 'Triceps Rope Pushdown', 'Leg Extension']
+        warmup: [
+            'Cardio general: 10 min de bici, cinta o eliptica a ritmo conversacional (RPE 3-4).',
+            'Circulos de brazos hacia adelante y atras (30s cada direccion).',
+            'Rotaciones de cadera abriendo y cerrando (1 min).',
+            'Sentadillas sin peso (bodyweight) 2x10 — activa cuadriceps y gluteos.',
+            'Zancadas alternas sin peso 2x8 por pierna — activa cadera y rodillas.',
+            'Movilidad de tobillo: circulos en ambos sentidos 30s por pie.'
+        ]
     },
     {
         id: 'day-2',
-        slug: 'dia-2-amarillo',
-        day: 'Miercoles',
+        slug: 'dia-2',
+        day: 'Dia 2',
         label: 'Dia 2',
-        colorName: 'Amarillo',
-        colorHex: '#d2b33f',
-        planLabel: 'Dia 2 (Amarillo)',
-        title: 'Espalda, biceps, femorales y gluteos',
-        focus: 'Tiron dominante con trabajo posterior para equilibrar cadena posterior.',
-        note: 'Manten el control en poleas y pausa de 1 segundo en hip thrust.',
-        blocks: [
-            {
-                id: 'A',
-                name: 'Activacion',
-                duration: 10,
-                intensity: 'RPE 4-5',
-                prescription: '10 minutos de aerobico suave + movilidad de escpula y cadera.'
-            },
-            {
-                id: 'B',
-                name: 'Espalda y biceps',
-                duration: 27,
-                intensity: 'RPE 6-7',
-                prescription: 'Vertical Trac, Lat con triangulo y biceps.'
-            },
-            {
-                id: 'C',
-                name: 'Femoral y gluteo',
-                duration: 18,
-                intensity: 'RPE 7',
-                prescription: 'Leg Curl y Hip Thrust en control total.'
-            },
-            {
-                id: 'D',
-                name: 'Salida',
-                duration: 15,
-                intensity: 'RPE 3-4',
-                prescription: '15 minutos de aerobico suave y respiracion para cierre de sesion.'
-            }
+        colorName: 'Morado',
+        colorHex: '#7c3aed',
+        title: 'Pecho y Triceps (Empuje)',
+        focus: 'Pectoral mayor y triceps con patrones de empuje en maquina guiada y peso libre.',
+        note: 'Manten escapulas fijas en todos los presses. Controla la fase negativa en 2 segundos.',
+        exerciseOrder: [
+            'Chest Press', 'Pec Fly', 'Incline DB Press', 'Incline DB Fly',
+            'Triceps Bar Pushdown', 'French Press', 'Triceps Rope Pushdown',
+            'Crunch', 'Russian Twist'
         ],
-        exerciseOrder: ['Vertical Traction', 'Lat Triangle Row', 'Leg Curl', 'Hip Thrust']
+        warmup: [
+            'Cardio general: 10 min de bici, cinta o eliptica a ritmo conversacional (RPE 3-4).',
+            'Circulos de brazos hacia adelante y atras (30s cada direccion).',
+            'Escapulares pushups (apoyo de rodillas) 2x10 — activa serrato y estabilizadores.',
+            'Band pull-aparts o aperturas con banda elastica 2x12 — activa romboides y deltoide posterior.',
+            'Rotaciones de torso con palo o sin peso (1 min).',
+            'Aperturas ligeras sin peso 2x10 — patron de pec fly sin carga.'
+        ]
     },
     {
         id: 'day-3',
-        slug: 'dia-3-azul',
-        day: 'Viernes',
+        slug: 'dia-3',
+        day: 'Dia 3',
         label: 'Dia 3',
-        colorName: 'Azul',
-        colorHex: '#4f8db8',
-        planLabel: 'Dia 3 (Azul)',
-        title: 'Hombros, brazos y aductores/abductores',
-        focus: 'Dia tecnico de hombros y brazos con accesorios de cadera.',
-        note: 'Rango limpio en deltoides y poleas, sin impulso del tronco.',
-        blocks: [
-            {
-                id: 'A',
-                name: 'Activacion',
-                duration: 10,
-                intensity: 'RPE 4-5',
-                prescription: '10 minutos de aerobico suave + movilidad de hombro y 2 series de aproximacion.'
-            },
-            {
-                id: 'B',
-                name: 'Hombros',
-                duration: 22,
-                intensity: 'RPE 6-7',
-                prescription: 'Press militar y vuelo lateral con tecnica fina.'
-            },
-            {
-                id: 'C',
-                name: 'Brazos y cadera',
-                duration: 23,
-                intensity: 'RPE 7-8',
-                prescription: 'Curl alternado, triceps barra, aductores y abductores.'
-            },
-            {
-                id: 'D',
-                name: 'Salida',
-                duration: 15,
-                intensity: 'RPE 3-4',
-                prescription: '15 minutos de aerobico suave para bajar pulsaciones e hidratarte.'
-            }
+        colorName: 'Amarillo',
+        colorHex: '#eab308',
+        title: 'Piernas atras y Hombros',
+        focus: 'Isquiotibiales, gluteos y deltoides para equilibrar la cadena posterior.',
+        note: 'Cadera estable en femoral y control de hombro en press militar.',
+        exerciseOrder: [
+            'Military Press', 'Cable Front Raise',
+            'Leg Curl', 'Adductor Machine', 'Abductor Machine', 'Multi Hip', 'Hip Thrust Machine',
+            'Back Extension', 'Bench Crunch'
         ],
-        exerciseOrder: ['Military Press', 'Lateral Raise', 'Alternating Curl', 'Triceps Bar Pushdown', 'Adductor and Abductor Machine']
+        warmup: [
+            'Cardio general: 10 min de bici, cinta o eliptica a ritmo conversacional (RPE 3-4).',
+            'Circulos de brazos hacia adelante y atras (30s cada direccion).',
+            'Rotaciones de cadera abriendo y cerrando (1 min).',
+            'Puentes de gluteo 2x12 — activa gluteo mayor e isquiotibiales.',
+            'Balanceo de piernas adelante/atras 1 min por pierna — movilidad de cadera.',
+            'Good mornings sin peso 2x10 — activa cadena posterior.'
+        ]
+    },
+    {
+        id: 'day-4',
+        slug: 'dia-4',
+        day: 'Dia 4',
+        label: 'Dia 4',
+        colorName: 'Naranja',
+        colorHex: '#f97316',
+        title: 'Espalda y Biceps (Traccion)',
+        focus: 'Dorsales, trapecio y biceps con patrones de tiron en poleas y maquinas.',
+        note: 'Tira con codos, no con lumbar. Apreta escapulas al final y controla el retorno.',
+        exerciseOrder: [
+            'Vertical Traction', 'Low Row', 'Lat Bar Pronated', 'Lat Triangle',
+            'DB Pullover', 'Barbell Shrug',
+            'Hammer Curl', 'Curl 21', 'Scott Curl',
+            'Oblique Leg Raise', 'Superman'
+        ],
+        warmup: [
+            'Cardio general: 10 min de bici, cinta o eliptica a ritmo conversacional (RPE 3-4).',
+            'Circulos de brazos hacia adelante y atras (30s cada direccion).',
+            'Escapular pull en polea liviana 2x12 — activa dorsales sin fatigar.',
+            'Rotaciones toracicas con palo o sin peso (1 min) — movilidad de columna.',
+            'Jalon recto con polea liviana 2x12 — patron de tiron sin carga.',
+            'Movilidad de muneca y antebrazo: circulos y estiramientos (1 min).'
+        ]
     }
 ];
 
-export const weeklySchedule = trainingDays.map((dayPlan) => ({
-    day: dayPlan.day,
-    label: `${dayPlan.label} · ${dayPlan.colorName}`,
-    focus: dayPlan.title,
-    note: dayPlan.note,
-    href: `/dias/${dayPlan.slug}`,
-    colorHex: dayPlan.colorHex,
-    planLabel: dayPlan.planLabel
-}));
-
-export const getDayTotalMinutes = (dayPlan: { blocks: Array<{ duration: number }> }) =>
-    dayPlan.blocks.reduce((accumulator, block) => accumulator + block.duration, 0);
+export const getExercisesForDay = (dayOrder: string[], exercises: Exercise[]) =>
+    dayOrder
+        .map((name) => exercises.find((e) => e.name === name))
+        .filter((e): e is Exercise => Boolean(e));

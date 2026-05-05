@@ -1,11 +1,9 @@
-import { sessionBlocks } from './sessions';
-
-export const sessionDistributionChart = sessionBlocks.map((block, index) => ({
-    name: block.id,
-    label: block.name,
-    minutes: block.duration,
-    fill: ['#165d48', '#4f8f7a', '#f08b4b', '#e6b96b', '#284d3a'][index]
-}));
+export const dayDistributionChart = [
+    { name: 'D1', label: 'Piernas delante\n+ Hombros', percentage: 25, fill: '#00bcd4' },
+    { name: 'D2', label: 'Pecho\n+ Triceps', percentage: 25, fill: '#7c3aed' },
+    { name: 'D3', label: 'Piernas atras\n+ Hombros', percentage: 25, fill: '#eab308' },
+    { name: 'D4', label: 'Espalda\n+ Biceps', percentage: 25, fill: '#f97316' }
+];
 
 export const adaptationTrendChart = [
     { week: 'Semana 1', tecnica: 88, carga: 38, tolerancia: 52 },

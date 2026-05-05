@@ -1,13 +1,7 @@
 ---
 import appIcon from '../assets/astro.svg';
-import ProfileSwitcher from './ProfileSwitcher.astro';
 import ThemeSwitcher from './ThemeSwitcher';
-
-interface Props {
-	currentProfile: 'yo' | 'pareja';
-}
-
-const { currentProfile } = Astro.props;
+import UserSwitcher from './UserSwitcher';
 ---
 
 <section class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
@@ -21,7 +15,7 @@ const { currentProfile } = Astro.props;
 	</a>
 
 	<div class="flex flex-col justify-end gap-2 sm:flex-row sm:items-center">
-		<ProfileSwitcher currentProfile={currentProfile} />
+		<UserSwitcher client:load />
 		<ThemeSwitcher client:load />
 	</div>
 </section>

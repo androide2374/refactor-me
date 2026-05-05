@@ -17,9 +17,9 @@ import {
 } from 'recharts';
 
 import {
-	adaptationTrendChart,
-	learningRadarChart,
-	sessionDistributionChart
+    adaptationTrendChart,
+    dayDistributionChart,
+    learningRadarChart
 } from '../../data/training-plan';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card';
 
@@ -35,18 +35,18 @@ export default function SessionCharts() {
 		<div className="grid gap-4 xl:grid-cols-3">
 			<Card className="border-border/70 bg-card/85">
 				<CardHeader>
-					<CardTitle>Distribucion de la sesion</CardTitle>
-					<CardDescription>Cada bloque tiene tiempo asignado para reducir fatiga decisional dentro del gimnasio.</CardDescription>
+				<CardTitle>Distribucion de la rotacion</CardTitle>
+				<CardDescription>Los 4 dias cubren todos los grupos musculares en partes iguales. Sin solapamiento ni dias perdidos.</CardDescription>
 				</CardHeader>
 				<CardContent>
 					<div className="h-72">
 						<ResponsiveContainer width="100%" height="100%">
-							<BarChart data={sessionDistributionChart} margin={{ top: 8, right: 8, left: -24, bottom: 0 }}>
+							<BarChart data={dayDistributionChart} margin={{ top: 8, right: 8, left: -24, bottom: 0 }}>
 								<CartesianGrid vertical={false} stroke="rgba(20, 34, 26, 0.08)" />
 								<XAxis dataKey="name" tickLine={false} axisLine={false} fontSize={12} />
-								<YAxis tickLine={false} axisLine={false} fontSize={12} />
+								<YAxis tickLine={false} axisLine={false} fontSize={12} domain={[0, 100]} />
 								<Tooltip cursor={{ fill: 'rgba(22, 93, 72, 0.06)' }} contentStyle={tooltipStyles} />
-								<Bar dataKey="minutes" radius={[12, 12, 0, 0]} fill="#165d48" />
+								<Bar dataKey="percentage" radius={[12, 12, 0, 0]} fill="#165d48" />
 							</BarChart>
 						</ResponsiveContainer>
 					</div>

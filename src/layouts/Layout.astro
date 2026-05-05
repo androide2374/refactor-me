@@ -1,5 +1,8 @@
 ---
+import DailyWeightPrompt from '../components/DailyWeightPrompt';
 import '../styles/global.css';
+import PWAInstallPrompt from '../components/PWAInstallPrompt';
+import PWAUpdateToast from '../components/PWAUpdateToast';
 
 interface Props {
 	title?: string;
@@ -25,6 +28,7 @@ const {
 		<meta name="theme-color" content="#165d48" />
 		<meta name="apple-mobile-web-app-capable" content="yes" />
 		<meta name="apple-mobile-web-app-status-bar-style" content="default" />
+		<meta name="apple-mobile-web-app-title" content="OnFit Focus" />
 		<script is:inline>
 			const savedTheme = localStorage.getItem('onfit-theme');
 			if (savedTheme) {
@@ -35,5 +39,8 @@ const {
 	</head>
 	<body>
 		<slot />
+		<DailyWeightPrompt client:load />
+		<PWAInstallPrompt client:load />
+		<PWAUpdateToast client:load />
 	</body>
 </html>

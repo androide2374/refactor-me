@@ -1,0 +1,28 @@
+---
+import { WifiOff } from 'lucide-react';
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Sin conexion · OnFit Focus" description="No hay conexion a internet. La aplicacion seguira funcionando con los datos guardados.">
+    <main class="mx-auto flex min-h-screen max-w-7xl flex-col items-center justify-center gap-8 px-4 py-16 sm:px-6 lg:px-8">
+        <div class="flex flex-col items-center gap-6 text-center">
+            <span class="inline-flex h-20 w-20 items-center justify-center rounded-3xl bg-primary/10 text-primary">
+                <WifiOff className="h-10 w-10" />
+            </span>
+            <div class="space-y-3">
+                <h1 class="text-4xl font-semibold tracking-[-0.04em] text-foreground sm:text-5xl">
+                    Sin conexion
+                </h1>
+                <p class="max-w-md text-base leading-7 text-muted-foreground">
+                    No hay internet en este momento. Podes seguir navegando por las paginas que ya visitaste. Los datos de peso se sincronizaran cuando vuelvas a tener conexion.
+                </p>
+            </div>
+            <a
+                href="/"
+                class="inline-flex items-center justify-center rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition hover:bg-primary/90"
+            >
+                Volver al inicio
+            </a>
+        </div>
+    </main>
+</Layout>

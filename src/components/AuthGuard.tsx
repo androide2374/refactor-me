@@ -1,23 +1,41 @@
 'use client';
 
 import { type ReactNode, useEffect, useState } from 'react';
-import { LogIn, UserRound } from 'lucide-react';
+import { LogIn, Loader2, UserRound } from 'lucide-react';
 
 import { useAuthStore } from '../stores/authStore';
+import { useBodyWeightStore } from '../stores/bodyWeightStore';
 import { useWeightStore } from '../stores/weightStore';
 
+function LoadingScreen() {
+    return (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-background">
+            <div className="flex flex-col items-center gap-4">
+                <Loader2 className="h-8 w-8 animate-spin text-primary" />
+                <p className="text-sm text-muted-foreground">Cargando...</p>
+            </div>
+        </div>
+    );
+}
+
 export default function AuthGuard({ children }: { children: ReactNode }) {
-    const { isAuthenticated, user, login } = useAuthStore();
-    const initStore = useWeightStore((s) => s.init);
+    const { _hasHydrated, isAuthenticated, user, login } = useAuthStore();
+    const initWeights = useWeightStore((s) => s.init);
+    const initBodyWeights = useBodyWeightStore((s) => s.init);
     const [username, setUsername] = useState('plugo');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
 
     useEffect(() => {
         if (isAuthenticated && user) {
-            initStore();
+            initWeights();
+            initBodyWeights();
         }
-    }, [isAuthenticated, user, initStore]);
+    }, [isAuthenticated, user, initWeights, initBodyWeights]);
+
+    if (!_hasHydrated) {
+        return <LoadingScreen />;
+    }
 
     if (isAuthenticated && user) {
         return <>{children}</>;

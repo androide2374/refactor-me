@@ -60,10 +60,10 @@ Static routes: `/dias/dia-1` through `/dias/dia-4`.
 
 ## Workflow
 
-- **Branch per task**: Always create a new branch from `main` before starting work. Name it `tipo/descripcion-corta` (e.g. `feat/simplified-day-view`, `fix/weight-logger-bug`). Only branch from another branch if explicitly requested.
-- **New session = new branch**: Each new development session starts fresh from `main`, never from a previous session's branch.
-- **Commit por todo**: After completing each subtask/todo item, make an individual commit with a descriptive message in Spanish or English.
-- **Pull Request**: After the last commit, push and create a PR immediately. Best moment: just before moving to the next task, so the branch is reviewable and CI runs on it.
+- **New session**: siempre empezar en `main`. Hacer `git checkout main && git pull`. Si hay cambios sin commitear, commitearlos y pushearlos primero, y recién ahi pasarse a `main`.
+- **Branch por tarea**: crear branch desde `main` con nombre `tipo/descripcion-corta`. Solo branch desde otra branch si se pide explícitamente.
+- **Commit por todo**: un commit por cada subtask completado.
+- **PR automático**: después del último commit, pushear y crear PR. No pasar a la siguiente tarea sin antes crear el PR.
 
 ## Conventions
 

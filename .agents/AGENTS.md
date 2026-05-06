@@ -62,7 +62,7 @@ Static routes: `/dias/dia-1` through `/dias/dia-4`.
 
 - **Branch per task**: Always create a new branch before starting work. Name it `tipo/descripcion-corta` (e.g. `feat/simplified-day-view`, `fix/weight-logger-bug`).
 - **Commit por todo**: After completing each subtask/todo item, make an individual commit with a descriptive message in Spanish or English.
-- **Pull Request**: After all commits are done, push and create a PR.
+- **Pull Request**: After the last commit, push and create a PR immediately. Best moment: just before moving to the next task, so the branch is reviewable and CI runs on it.
 
 ## Conventions
 

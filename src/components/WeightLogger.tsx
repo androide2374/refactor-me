@@ -97,7 +97,7 @@ export default function WeightLogger({ exerciseName, exerciseNameEs, prescribedS
                                 <span>{lastRecord.date.slice(5)}</span>
                             </div>
                         )}
-                        {records.length > 1 && (
+                        {records.length > 0 && (
                             <button
                                 type="button"
                                 onClick={() => setShowChart(true)}

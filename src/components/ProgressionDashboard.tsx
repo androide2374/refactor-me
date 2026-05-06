@@ -41,12 +41,12 @@ function BodyWeightChart({ userId }: { userId: string }) {
         [entries]
     );
 
-    if (chartData.length < 2) {
+    if (chartData.length === 0) {
         return (
             <div className="rounded-[1.5rem] border border-border/70 bg-card/80 p-5">
                 <p className="text-sm font-semibold text-foreground">Peso corporal</p>
                 <p className="mt-6 text-center text-sm text-muted-foreground pb-4">
-                    Necesitas al menos 2 registros de peso corporal. Usa el prompt diario o carga manualmente.
+                    Aun no hay registros de peso corporal. Usa el prompt diario o carga manualmente.
                 </p>
             </div>
         );
@@ -146,13 +146,7 @@ function ExercisePanel({ exerciseName, exerciseNameEs, userId }: {
             </div>
 
             <div className="mt-4 h-44">
-                {chartData.length === 1 ? (
-                    <div className="flex h-full items-center justify-center rounded-[1rem] border border-border/50 bg-background/50">
-                        <p className="text-xs text-muted-foreground px-4 text-center">
-                            Un solo registro. Carga otro dia para ver la curva de progresion.
-                        </p>
-                    </div>
-                ) : (
+                {chartData.length > 0 && (
                     <ResponsiveContainer width="100%" height="100%">
                         <LineChart data={chartData} margin={{ top: 8, right: 12, left: -12, bottom: 0 }}>
                             <CartesianGrid strokeDasharray="4 4" vertical={false} stroke="rgba(20, 34, 26, 0.08)" />
@@ -294,7 +288,7 @@ export default function ProgressionDashboard() {
                         </span>
                         <h2 className="mt-4 text-xl font-semibold text-foreground">Sin datos de ejercicios</h2>
                         <p className="mt-2 text-sm text-muted-foreground max-w-md mx-auto">
-                            Registra pesos en los ejercicios de cada dia para ver la progresion aca. Necesitas al menos 2 registros por ejercicio.
+                            Registra pesos en los ejercicios de cada dia para ver la progresion aca.
                         </p>
                     </div>
                 ) : (

@@ -38,7 +38,7 @@ export default function WeightChart({ exerciseName, exerciseNameEs, userId, onCl
             }));
     }, [records]);
 
-    const hasData = chartData.length > 1;
+    const hasData = chartData.length > 0;
 
     return (
         <dialog open className="app-modal fixed inset-0 z-50 items-center justify-center p-3" aria-label={`Progresion ${exerciseNameEs}`}>
@@ -119,7 +119,7 @@ export default function WeightChart({ exerciseName, exerciseNameEs, userId, onCl
                 ) : (
                     <div className="mt-4 rounded-[1.2rem] border border-border/70 bg-background/50 p-8 text-center">
                         <p className="text-sm text-muted-foreground">
-                            Necesitas al menos 2 registros para ver la progresion. Empeza a cargar pesos.
+                            Aun no hay registros de peso para este ejercicio. Empeza a cargar pesos.
                         </p>
                     </div>
                 )}

@@ -58,6 +58,13 @@ Run via `node scripts/migrate.mjs` (hardcoded connection string in that file).
 
 Static routes: `/dias/dia-1` through `/dias/dia-4`.
 
+## Workflow
+
+- **Branch per task**: Always create a new branch from `main` before starting work. Name it `tipo/descripcion-corta` (e.g. `feat/simplified-day-view`, `fix/weight-logger-bug`). Only branch from another branch if explicitly requested.
+- **New session = new branch**: Each new development session starts fresh from `main`, never from a previous session's branch.
+- **Commit por todo**: After completing each subtask/todo item, make an individual commit with a descriptive message in Spanish or English.
+- **Pull Request**: After the last commit, push and create a PR immediately. Best moment: just before moving to the next task, so the branch is reviewable and CI runs on it.
+
 ## Conventions
 
 - **Language**: UI/data in Spanish, code names in English. Exercise `nameEs` MUST include original gym card name in parens, e.g. `"Press de pecho en maquina (CHEST PRESS)"`.

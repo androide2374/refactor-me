@@ -4,6 +4,7 @@ export interface Exercise {
     muscleGroup: string;
     sets: number;
     reps: number;
+    isTimed?: boolean;
     description: string;
     cues: string[];
     commonMistakes: string[];
@@ -496,6 +497,7 @@ export const exercises: Exercise[] = [
         muscleGroup: 'Abdominales (recto abdominal, transverso)',
         sets: 3,
         reps: 30,
+        isTimed: true,
         description: 'Boca abajo apoyado sobre antebrazos y puntas de pies. Cuerpo en linea recta de la cabeza a los talones. Contrae el abdomen y gluteos. Mantene la posicion 30 segundos sin que la cadera se hunda ni se eleve.',
         cues: ['Codos bajo los hombros', 'Abdomen contraido', 'Cadera neutra, no hundida', 'Gluteos apretados', 'Respiracion constante'],
         commonMistakes: ['Dejar caer la cadera', 'Elevar demasiado la cadera', 'Aguantar la respiracion', 'Mirar hacia adelante tensionando el cuello'],
@@ -526,6 +528,7 @@ export const exercises: Exercise[] = [
         muscleGroup: 'Oblicuos, abdominales',
         sets: 3,
         reps: 15,
+        isTimed: true,
         description: 'Acostado de costado, apoyado sobre un antebrazo con el codo bajo el hombro. Piernas extendidas y apiladas. Eleva la cadera hasta formar una linea recta. Mantene 15 segundos. Cambia de lado.',
         cues: ['Codo bajo el hombro', 'Cadera alta y alineada', 'Abdomen duro', 'No dejes caer la cadera', '15 segundos por lado'],
         commonMistakes: ['Dejar caer la cadera', 'Rotar el cuerpo hacia adelante', 'Apoyar la cabeza en el hombro', 'Aguantar la respiracion'],

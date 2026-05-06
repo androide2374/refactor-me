@@ -116,7 +116,7 @@ export default function ExerciseTabs() {
                                     <CardContent className="space-y-4">
                                         <div className="grid gap-2 text-sm text-foreground/86">
                                             <p>
-                                                <strong>Prescripcion:</strong> {exercise.sets} series x {exercise.reps === 1 ? '30 segundos' : `${exercise.reps} repeticiones`}.
+                                                <strong>Prescripcion:</strong> {exercise.sets} series x {exercise.isTimed ? `${exercise.reps} segundos` : `${exercise.reps} repeticiones`}.
                                             </p>
                                             <p>
                                                 <strong>Cues:</strong> {exercise.cues.join(' · ')}.
@@ -240,7 +240,7 @@ export default function ExerciseTabs() {
                         </div>
 
                         <div className="mt-4 rounded-[1.2rem] border border-border/70 bg-background/70 p-4 text-sm leading-6 text-foreground/88">
-                            <strong>Prescripcion:</strong> {selectedExercise.sets} series x {selectedExercise.reps === 1 ? '30 segundos' : `${selectedExercise.reps} reps`} · Descanso {selectedExercise.restSeconds}s entre series.
+                                            <strong>Prescripcion:</strong> {selectedExercise.sets} series x {selectedExercise.isTimed ? `${selectedExercise.reps} segundos` : `${selectedExercise.reps} reps`} · Descanso {selectedExercise.restSeconds}s entre series.
                         </div>
 
                         <div className="mt-5 flex flex-wrap justify-end gap-2">

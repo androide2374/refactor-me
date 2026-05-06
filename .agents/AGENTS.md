@@ -58,6 +58,12 @@ Run via `node scripts/migrate.mjs` (hardcoded connection string in that file).
 
 Static routes: `/dias/dia-1` through `/dias/dia-4`.
 
+## Workflow
+
+- **Branch per task**: Always create a new branch before starting work. Name it `tipo/descripcion-corta` (e.g. `feat/simplified-day-view`, `fix/weight-logger-bug`).
+- **Commit por todo**: After completing each subtask/todo item, make an individual commit with a descriptive message in Spanish or English.
+- **Pull Request**: After all commits are done, push and create a PR.
+
 ## Conventions
 
 - **Language**: UI/data in Spanish, code names in English. Exercise `nameEs` MUST include original gym card name in parens, e.g. `"Press de pecho en maquina (CHEST PRESS)"`.
